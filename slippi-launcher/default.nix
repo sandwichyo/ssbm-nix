@@ -18,11 +18,11 @@ stdenvNoCC.mkDerivation rec {
       hash = "sha256-pdBPCQ0GL7TFM5o48noc6Tovmeq+f2M3wpallems8aE=";
     };
 
-    extraInstallCommands = ''
-      source "${makeWrapper}/nix-support/setup-hook"
-      wrapProgram $out/bin/slippi-launcher-${version} \
-        --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
-    '';
+    # extraInstallCommands = ''
+    #   source "${makeWrapper}/nix-support/setup-hook"
+    #   wrapProgram $out/bin/slippi-launcher-${version} \
+    #     --add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}"
+    # '';
   };
 
   desktopItems = [
