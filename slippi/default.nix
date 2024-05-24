@@ -2,7 +2,7 @@
   stdenv,
   lib,
   makeDesktopItem,
-  slippi-desktop,
+  # slippi-desktop,
   playbackSlippi,
   fetchFromGitHub,
   makeWrapper,
@@ -104,19 +104,13 @@ in
       ]
       ++ lib.optional playbackSlippi "-DIS_PLAYBACK=true";
 
-    postBuild = with lib;
-      optionalString playbackSlippi ''
-        rm -rf ../Data/Sys/GameSettings
-        mkdir -p ../Data
-        cp -r "${slippi-desktop}/app/dolphin-dev/overwrite/Sys/GameSettings" ../Data/Sys
-      ''
-      + ''
-        cp -r -n ../Data/Sys/ Binaries/
-        cp -r Binaries/ $out
-        mkdir -p $out/lib
-        cp $build/build/source/build/Source/Core/DolphinWX/libslippi_rust_extensions.so $out/lib
-        mkdir -p $out/bin
-      '';
+    postBuild = ''
+      cp -r -n ../Data/Sys/ Binaries/
+      cp -r Binaries/ $out
+      mkdir -p $out/lib
+      cp $build/build/source/build/Source/Core/DolphinWX/libslippi_rust_extensions.so $out/lib
+      mkdir -p $out/bin
+    '';
 
     installPhase =
       if playbackSlippi
