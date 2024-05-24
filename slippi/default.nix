@@ -45,6 +45,7 @@
   cargo,
   rustPlatform,
   alsa-lib,
+  ...
 }: let
   netplay-desktop = makeDesktopItem {
     name = "Slippi Online";
