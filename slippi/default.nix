@@ -68,18 +68,27 @@
   };
 in
   stdenv.mkDerivation rec {
-    pname = "slippi-ishiiruka";
-    version = "3.4.0";
-    name = "${pname}-${version}-${
+    pname =
       if playbackSlippi
-      then "playback"
-      else "netplay"
-    }";
+      then "slippi-ishiiruka-playback"
+      else "slippi-ishiiruka-netplay";
+    version =
+      if playbackSlippi
+      then "3.4.1"
+      else "3.4.0";
+    name = "${pname}-${version}";
     src = fetchFromGitHub {
       owner = "project-slippi";
       repo = "Ishiiruka";
-      rev = "v${version}";
-      hash = "sha256-qYPrAPAPOoCqfidLsT+ycQd2dXtsjo1PRt4TznVZf6U=";
+      rev =
+        if playbackSlippi
+        then "4f53653f3ba3eb6fee34280f23d82f30e6691ed7"
+        else "v3.4.0";
+
+      hash =
+        if playbackSlippi
+        then "sha256-qYPrAPAPOoCqfidLsT+ycQd2dXtsjo1PRt4TznVZf6U="
+        else "sha256-qYPrAPAPOoCqfidLsT+ycQd2dXtsjo1PRt4TznVZf6U=";
       fetchSubmodules = true;
     };
 
