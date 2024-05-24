@@ -4,7 +4,7 @@
   fetchurl,
   makeDesktopItem,
   copyDesktopItems,
-  makeWrapper,
+  # makeWrapper,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "slippi-launcher";

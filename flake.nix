@@ -140,13 +140,13 @@
             };
             # Netplay
             netplayDolphinPath = mkOption {
-              default = "${pkgs.slippi-netplay}";
+              default = "${pkgs.slippi-netplay}/";
               type = types.str;
               description = "The path to the folder containing the Netplay Dolphin Executable";
             };
             # Playback
             playbackDolphinPath = mkOption {
-              default = "${pkgs.slippi-playback}";
+              default = "${pkgs.slippi-playback}/";
               type = types.str;
               description = "The path to the folder containing the Playback Dolphin Executable";
             };
