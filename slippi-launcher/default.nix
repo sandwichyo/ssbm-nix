@@ -28,7 +28,7 @@ stdenvNoCC.mkDerivation rec {
   desktopItems = [
     (makeDesktopItem {
       name = "slippi-launcher";
-      exec = "slippi-launcher-${version}";
+      exec = "${src}/bin/slippi-launcher";
       icon = "slippi-launcher";
       desktopName = "Slippi Launcher";
       comment = "The way to play Slippi Online and watch replays";
@@ -43,6 +43,7 @@ stdenvNoCC.mkDerivation rec {
 
     mkdir -p "$out/bin"
     cp -r "$src/bin" "$out"
+    
 
     runHook postInstall
   '';
