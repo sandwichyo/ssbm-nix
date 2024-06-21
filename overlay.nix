@@ -20,19 +20,6 @@ with final.pkgs; rec {
     playbackSlippi = false;
   };
 
-  slippi-netplay-chat-edition = slippi-netplay.overrideAttrs (oldAttrs: rec {
-    pname = "slippi-ishiiruka-chat";
-    version = "release/2.3.0";
-    name = pname;
-
-    src = fetchFromGitHub {
-      owner = "project-slippi";
-      repo = "Ishiiruka";
-      rev = version;
-      sha256 = "1rd449s00dqmngp3mrapg91k4hhg2kyc0kizc37vb4l2zswpkqah";
-    };
-  });
-
   slippi-launcher = callPackage ./slippi-launcher {};
 
   gcmtool = callPackage ./gcmtool {};

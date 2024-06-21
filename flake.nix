@@ -53,7 +53,6 @@
         slippi-launcher
         gecko
         powerpc-eabi-assembling
-        slippi-netplay-chat-edition
         gcmtool
         projectplus-sdcard
         projectplus-config
