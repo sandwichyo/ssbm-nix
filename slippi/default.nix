@@ -74,7 +74,7 @@ in
       else "slippi-ishiiruka-netplay";
     version =
       if playbackSlippi
-      then "3.4.3"
+      then "3.4.1"
       else "3.4.1";
     name = "${pname}-${version}";
     src = fetchFromGitHub {
@@ -88,7 +88,7 @@ in
       hash =
         if playbackSlippi
         then "sha256-qYPrAPAPOoCqfidLsT+ycQd2dXtsjo1PRt4TznVZf6U="
-        else "sha256-70328610bd751858d5677576dd3b2ebf9ced37a6=";
+        else "sha256-uqy9YQnvryTHmskzlX+4st1VacnHbpC2gdC+PgvFUlA=";
       fetchSubmodules = true;
     };
 
