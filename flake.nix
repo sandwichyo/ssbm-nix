@@ -1,30 +1,23 @@
 {
-  inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    slippi-desktop.url = "github:project-slippi/slippi-desktop-app";
-    slippi-desktop.flake = false;
-  };
-
+  inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
   description = "Nix expressions for Super Smash Bros. Melee players.";
 
   outputs = {
     self,
     nixpkgs,
-    slippi-desktop,
     ...
   }: let
     supportedSystems = ["x86_64-linux"];
     forAllSystems = f: nixpkgs.lib.genAttrs supportedSystems (system: f system);
   in {
-    overlays.default = final: prev: import ./overlay.nix {inherit slippi-desktop final prev;};
-    overlay = self.outputs.overlays.default;
+    overlays.default = final: prev: import ./overlay.nix {inherit final prev;};
 
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     apps = forAllSystems (system: let
       pkgs = import nixpkgs {
         inherit system;
-        overlays = [self.overlay];
+        overlays = [self.overlays.default];
       };
     in {
       slippi-netplay = {
@@ -60,13 +53,15 @@
         ;
     });
 
+    overlay = {nixpkgs.overlays = [ self.overlays.default ];};
+
+
     nixosModule = self.outputs.nixosModules.default;
     nixosModules.default = {config, ...}: let
       cfg = config.ssbm;
     in
       with nixpkgs.lib; {
         options.ssbm = {
-          overlay.enable = mkEnableOption "Activate the package overlay.";
           cache.enable = mkEnableOption "Turn on cache.";
           gcc.oc-kmod.enable = mkEnableOption "Turn on overclocking kernel module.";
           gcc.rules.enable = mkEnableOption "Turn on rules for your gamecube controller adapter.";
@@ -85,7 +80,6 @@
           };
         };
         config = {
-          nixpkgs.overlays = [(mkIf cfg.overlay.enable self.overlays.default)];
           services.udev.extraRules = mkIf cfg.gcc.rules.enable cfg.gcc.rules.rules;
           boot.kernelModules = mkIf cfg.gcc.oc-kmod.enable ["gcadapter_oc"];
           boot.extraModulePackages = mkIf cfg.gcc.oc-kmod.enable [
@@ -151,9 +145,9 @@
             };
           };
         };
-        config = {
+        config = mkIf cfg.slippi-launcher.enable {
           nixpkgs.overlays = [self.overlays.default];
-          home.packages = [(mkIf cfg.slippi-launcher.enable pkgs.slippi-launcher) ];
+          home.packages = [pkgs.slippi-launcher];
           xdg.configFile."Slippi Launcher/Settings".source = let
             jsonFormat = pkgs.formats.json {};
           in
@@ -171,11 +165,6 @@
                 autoUpdateLauncher = false;
               };
             };
-          
-          xdg.configFile."Slippi Launcher/netplay/Slippi_Online-x86_64.AppImage".source = 
-            (cfg.slippi-launcher.netplayDolphinPath + "/bin/slippi-netplay");
-          xdg.configFile."Slippi Launcher/playback/Slippi_Playback-x86_64.AppImage".source = 
-            (cfg.slippi-launcher.playbackDolphinPath + "/bin/slippi-playback");
         };
       };
   };
