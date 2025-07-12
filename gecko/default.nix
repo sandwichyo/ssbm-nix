@@ -1,9 +1,9 @@
-{ stdenv
-, fetchFromGitHub
-, buildGoModule
+{
+  stdenv,
+  fetchFromGitHub,
+  buildGoPackage,
 }:
-
-buildGoModule rec {
+buildGoPackage rec {
   pname = "gecko";
   version = "3.4.0";
 
@@ -14,7 +14,5 @@ buildGoModule rec {
     sha256 = "1jqxcimpl58czvxi52jndrnzhhqmg0i4v5dp6amibg2wxwyy12w3";
   };
 
-  
-  goModulePath = "github.com/JLaferri/gecko";
+  goPackagePath = "gecko";
 }
-
