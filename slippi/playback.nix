@@ -11,7 +11,7 @@ stdenvNoCC.mkDerivation rec {
 
   src = fetchzip {
     url = "https://github.com/project-slippi/Ishiiruka-Playback/releases/download/v${version}/playback-${version}-Linux.zip";
-    hash = "sha256-x/y6C2EU7qtaogNn2Jpmna7r1jndxDqplpiDsYxJzxw=";
+    hash = "sha256-LWo5gIXQck4dq9uKOYWElPsIUw2/GcMboteQsAx549k=;
 
     stripRoot=false;
   };
