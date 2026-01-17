@@ -9,7 +9,7 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "slippi-launcher";
-  version = "2.11.10";
+  version = "2.13.3";
 
   src = fetchurl {
     url = "https://github.com/project-slippi/slippi-launcher/releases/download/v${version}/Slippi-Launcher-${version}-x86_64.AppImage";
