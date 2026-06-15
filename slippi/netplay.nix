@@ -3,7 +3,7 @@
   appimageTools,
   fetchurl,
   makeDesktopItem,
-  copyDesktopItems
+  copyDesktopItems,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "slippi-netplay";
@@ -15,7 +15,7 @@ stdenvNoCC.mkDerivation rec {
   };
   dontUnpack = true;
 
-  contents = appimageTools.extract { inherit pname version src; };
+  contents = appimageTools.extract {inherit pname version src;};
 
   src-wrapped = appimageTools.wrapType2 rec {
     inherit pname version src;

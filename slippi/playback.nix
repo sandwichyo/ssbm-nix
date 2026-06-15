@@ -3,7 +3,7 @@
   appimageTools,
   fetchzip,
   makeDesktopItem,
-  copyDesktopItems
+  copyDesktopItems,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "slippi-playback";
@@ -13,12 +13,15 @@ stdenvNoCC.mkDerivation rec {
     url = "https://github.com/project-slippi/Ishiiruka-Playback/releases/download/v${version}/playback-${version}-Linux.zip";
     hash = "sha256-LWo5gIXQck4dq9uKOYWElPsIUw2/GcMboteQsAx549k=";
 
-    stripRoot=false;
+    stripRoot = false;
   };
 
   appimage = "${src}/Slippi_Playback-x86_64.AppImage";
 
-  contents = appimageTools.extract { inherit pname version; src = appimage; };
+  contents = appimageTools.extract {
+    inherit pname version;
+    src = appimage;
+  };
 
   appimage-wrapped = appimageTools.wrapType2 rec {
     inherit pname version;

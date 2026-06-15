@@ -39,7 +39,6 @@
       inherit
         (pkgs)
         # dat-texture-wizard
-        
         wiimms-iso-tools
         slippi-netplay
         slippi-playback
@@ -52,9 +51,6 @@
         keyb0xx
         ;
     });
-
-    overlay = {nixpkgs.overlays = [ self.overlays.default ];};
-
 
     nixosModule = self.outputs.nixosModules.default;
     nixosModules.default = {config, ...}: let

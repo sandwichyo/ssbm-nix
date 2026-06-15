@@ -5,7 +5,7 @@
   makeDesktopItem,
   copyDesktopItems,
   slippi-netplay,
-  slippi-playback
+  slippi-playback,
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "slippi-launcher";
@@ -17,9 +17,9 @@ stdenvNoCC.mkDerivation rec {
   };
   dontUnpack = true;
 
-  contents = appimageTools.extract { inherit pname version src; };
+  contents = appimageTools.extract {inherit pname version src;};
 
-  src-wrapped = appimageTools.wrapType2 rec { inherit pname version src; };
+  src-wrapped = appimageTools.wrapType2 rec {inherit pname version src;};
 
   desktopItems = [
     (makeDesktopItem {
@@ -53,7 +53,7 @@ stdenvNoCC.mkDerivation rec {
     exec $out/.slippi-launcher "\$@"
     EOF
     chmod +x $out/bin/slippi-launcher
-    
+
     runHook postInstall
   '';
 
