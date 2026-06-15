@@ -7,8 +7,8 @@ jobs:
     name: Validate flake
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: cachix/install-nix-action@v22
+    - uses: actions/checkout@v4
+    - uses: cachix/install-nix-action@v31
       with:
         extra_nix_config: 'experimental-features = nix-command flakes'
     - name: Run nix flake check
